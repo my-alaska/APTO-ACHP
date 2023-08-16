@@ -1,0 +1,5 @@
+C:/Users/Piotr/Desktop/zajecia/6_semestr/APTO/projekt/cmake-build-debug/CMakeFiles/projekt.dir
+C:/Users/Piotr/Desktop/zajecia/6_semestr/APTO/projekt/cmake-build-debug/CMakeFiles/projekt2.dir
+C:/Users/Piotr/Desktop/zajecia/6_semestr/APTO/projekt/cmake-build-debug/CMakeFiles/projekt3.dir
+C:/Users/Piotr/Desktop/zajecia/6_semestr/APTO/projekt/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Piotr/Desktop/zajecia/6_semestr/APTO/projekt/cmake-build-debug/CMakeFiles/rebuild_cache.dir

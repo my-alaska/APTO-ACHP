@@ -1,0 +1,192 @@
+        -:    0:Source:C:/Users/Piotr/Desktop/zajecia/6_semestr/APTO/projekt/main.c
+        -:    0:Graph:C:\Users\Piotr\Desktop\zajecia\6_semestr\APTO\projekt\cmake-build-debug-coverage\CMakeFiles\projekt.dir\main.c.gcno
+        -:    0:Data:C:\Users\Piotr\Desktop\zajecia\6_semestr\APTO\projekt\cmake-build-debug-coverage\CMakeFiles\projekt.dir\main.c.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdlib.h>
+        -:    2:#include <stdio.h>
+        -:    3:
+        -:    4:#define _get_(i,j) ((i)>=0&&(i)<n&&(j)>=0&&(j)<m&&solution&1<<((i)*m+(j))?1:0)
+        -:    5:
+        -:    6:unsigned short m, n;
+        -:    7:unsigned char *board;
+        -:    8:unsigned char **boards;
+        -:    9:
+function get_input called 1 returned 100% blocks executed 100%
+        1:   10:int get_input(){
+        1:   11:    scanf("%hd %hd", &m, &n);
+        1:   11-block  0
+call    0 returned 1
+        1:   12:    boards = malloc(sizeof(char*)*n);
+        1:   13:    board = malloc(sizeof(char)*n*m);
+        5:   14:    for(int i =0; i < n; i++){
+        5:   14-block  0
+branch  0 taken 4
+branch  1 taken 1 (fallthrough)
+        4:   15:        boards[i] = board + i * m;
+        4:   16:        scanf("%s",boards[i]);
+        4:   16-block  0
+call    0 returned 4
+        -:   17:    }
+        1:   18:    return 0;
+        1:   18-block  0
+        -:   19:}
+        -:   20:
+function free_board called 1 returned 100% blocks executed 100%
+        1:   21:int free_board(){
+        1:   22:    free(boards);
+        1:   23:    free(board);
+        1:   24:    return 0;
+        1:   24-block  0
+        -:   25:}
+        -:   26:
+function print_solution called 1 returned 100% blocks executed 100%
+        1:   27:int print_solution(unsigned long long solution){
+        5:   28:    for (int i = 0; i < n; i++){
+        1:   28-block  0
+        5:   28-block  1
+branch  0 taken 4
+branch  1 taken 1 (fallthrough)
+       24:   29:        for(int j = 0; j < m; j++){
+        4:   29-block  0
+       24:   29-block  1
+branch  0 taken 20
+branch  1 taken 4 (fallthrough)
+       20:   30:            printf("%d",solution & 1 ? 1 : 0);
+       20:   30-block  0
+call    0 returned 20
+       20:   31:            solution = solution>>1;
+        -:   32:        }
+        4:   33:        printf("\n");
+        4:   33-block  0
+call    0 returned 4
+        -:   34:    }
+        1:   35:    return 0;
+        1:   35-block  0
+        -:   36:}
+        -:   37:
+function check_solution called 1048575 returned 100% blocks executed 100%
+  1048575:   38:int check_solution(unsigned long long solution){
+  1048575:   39:    unsigned char * row = board;
+        -:   40:    int neighbours;
+        -:   41:    register int i,j;
+  1050657:   42:    for(i = 0; i < n; i++){
+  1048575:   42-block  0
+  1050657:   42-block  1
+branch  0 taken 1050656
+branch  1 taken 1 (fallthrough)
+  1418276:   43:        for(j = 0; j < m; j++){
+  1050656:   43-block  0
+   367620:   43-block  1
+  1418276:   43-block  2
+branch  0 taken 1416194
+branch  1 taken 2082 (fallthrough)
+  1416194:   44:            neighbours = _get_(i-1,j) + _get_(i+1,j) + _get_(i,j-1) + _get_(i,j+1);
+  1416194:   44-block  0
+branch  0 taken 3075 (fallthrough)
+branch  1 taken 1413119
+     3075:   44-block  1
+branch  2 taken 3075 (fallthrough)
+branch  3 taken 0
+     3075:   44-block  2
+branch  4 taken 3075 (fallthrough)
+branch  5 taken 0
+     3075:   44-block  3
+branch  6 taken 3075 (fallthrough)
+branch  7 taken 0
+     3075:   44-block  4
+branch  8 taken 319 (fallthrough)
+branch  9 taken 2756
+      319:   44-block  5
+  1415875:   44-block  6
+  1416194:   44-block  7
+branch 10 taken 1416194 (fallthrough)
+branch 11 taken 0
+  1416194:   44-block  8
+branch 12 taken 1416189 (fallthrough)
+branch 13 taken 5
+  1416189:   44-block  9
+branch 14 taken 1416189 (fallthrough)
+branch 15 taken 0
+  1416189:   44-block 10
+branch 16 taken 1416189 (fallthrough)
+branch 17 taken 0
+  1416189:   44-block 11
+branch 18 taken 708095 (fallthrough)
+branch 19 taken 708094
+   708095:   44-block 12
+   708099:   44-block 13
+  1416194:   44-block 14
+branch 20 taken 1416194 (fallthrough)
+branch 21 taken 0
+  1416194:   44-block 15
+branch 22 taken 1416194 (fallthrough)
+branch 23 taken 0
+  1416194:   44-block 16
+branch 24 taken 365538 (fallthrough)
+branch 25 taken 1050656
+   365538:   44-block 17
+branch 26 taken 365538 (fallthrough)
+branch 27 taken 0
+   365538:   44-block 18
+branch 28 taken 62417 (fallthrough)
+branch 29 taken 303121
+    62417:   44-block 19
+  1353777:   44-block 20
+  1416194:   44-block 21
+branch 30 taken 1416194 (fallthrough)
+branch 31 taken 0
+  1416194:   44-block 22
+branch 32 taken 1416194 (fallthrough)
+branch 33 taken 0
+  1416194:   44-block 23
+branch 34 taken 1416194 (fallthrough)
+branch 35 taken 0
+  1416194:   44-block 24
+branch 36 taken 1403839 (fallthrough)
+branch 37 taken 12355
+  1403839:   44-block 25
+branch 38 taken 703291 (fallthrough)
+branch 39 taken 700548
+   703291:   44-block 26
+   712903:   44-block 27
+  1416194:   45:            neighbours = solution & 1 << (i*m+j) ? 4 - neighbours : neighbours;
+  1416194:   45-block  0
+branch  0 taken 737183 (fallthrough)
+branch  1 taken 679011
+   737183:   45-block  1
+   679011:   45-block  2
+  1416194:   46:            if (neighbours != row[j] - 48) return 0;
+  1416194:   46-block  0
+branch  0 taken 1048574 (fallthrough)
+branch  1 taken 367620
+  1048574:   46-block  1
+        -:   47:        }
+     2082:   48:        row+=m;
+     2082:   48-block  0
+        -:   49:    }
+        1:   50:    return 1;
+        1:   50-block  0
+        -:   51:}
+        -:   52:
+function main called 1 returned 100% blocks executed 100%
+        1:   53:int main(){
+        1:   54:    get_input();
+        1:   54-block  0
+call    0 returned 1
+        -:   55:    register unsigned long long i;
+  1048576:   56:    for(i = 1; !( i & 1 << (m*n)) ; i++) if (check_solution(i)) print_solution(i);
+  1048575:   56-block  0
+call    0 returned 1048575
+branch  1 taken 1 (fallthrough)
+branch  2 taken 1048574
+        1:   56-block  1
+call    3 returned 1
+  1048575:   56-block  2
+  1048576:   56-block  3
+branch  4 taken 1048575
+branch  5 taken 1 (fallthrough)
+        1:   57:    free_board();
+        1:   57-block  0
+call    0 returned 1
+        1:   58:    return 0;
+        -:   59:}
