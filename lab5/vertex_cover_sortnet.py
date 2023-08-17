@@ -1,48 +1,48 @@
-from lab5.utils.dimacs import *
+from utils.sortnet import *
+from utils.dimacs import *
 import pycosat
 
 
-def limit_k(n, k):
-    def f(i, j):
-        return n + 1 + (j + i * (k + 2))
+def get_insertion_CNF(first, last):
+    """Creating insertion sort net
+    for lines from 'first' to 'last' (exclusive)
 
-    k_CNF = []
+    """
+    lines = list(range(first, last))
+    n = last - first
+    net = sorterNet(start=last, lines=lines, equiv=False)
 
-    for i in range(n + 1):
-        k_CNF.append([f(i, 0)])
+    for i in range(1, n):
+        for j in range(i, 0, -1):
+            net.comp(j, j - 1)
 
-    for j in range(1, k + 2):
-        k_CNF.append([-f(0, j)])
-
-    for i in range(1, n + 1):
-        for j in range(k + 2):
-            k_CNF.append([-f(i - 1, j), f(i, j)])
-
-    for i in range(1, n + 1):
-        for j in range(1, k + 2):
-            k_CNF.append([-f(i - 1, j - 1), -(i), f(i, j)])
-
-    k_CNF.append([-f(n, k + 1)])
-
-    return k_CNF
+    return net
 
 
-def threshold_VC(G, k):
+def sortnet_VC(G, k):
     """
     Algorithm to solve vertex cover problem by SAT reduction
-    and using thresholding function
+    and using insertion sorting net
 
     Each vertex get it's own sat variable
     All edges represent a CNF clause - one of it's vertices must be included in the solution
-    Thresholding function is used is used to create a CNF formula
+    Sorting network is used to create a CNF formula
     that makes sure that at most k variables are used
     """
 
-    k_CNF = edgeList(G) + limit_k(len(G) - 1, k)
-    result = pycosat.solve(k_CNF)
-    if result != "UNSAT":
-        result = {i for i in result if i > 0}
-    return result
+    # ensure that at most k vertices are selected
+    net_CNF = get_insertion_CNF(1, len(G))
+    k_CNF = net_CNF.CNF + [[-net_CNF.lines[k]]]
+
+    # adding edgelist ensures that all edges are covered
+    formula = edgeList(G) + k_CNF
+
+    result = pycosat.solve(formula)
+
+    if result == "UNSAT":
+        return "UNSAT"
+
+    return {v for v in result if v > 0}
 
 
 if __name__ == "__main__":
@@ -95,10 +95,10 @@ if __name__ == "__main__":
         print(name)
         G = loadGraph(graph_dir + "/" + name)
         k = 0
-        solution = threshold_VC(G, k)
+        solution = sortnet_VC(G, k)
         while solution == "UNSAT":
             k += 1
-            solution = threshold_VC(G, k)
+            solution = sortnet_VC(G, k)
 
         if not isVC(edgeList(G), solution):
             print("WRONG SOLUTION")
