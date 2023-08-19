@@ -1,5 +1,5 @@
 from utils.dimacs import *
-from solution import *
+from lab1.solution import *
 
 graphs = [
     ("e5"),
@@ -45,31 +45,18 @@ if __name__ == "__main__":
     data_dir = "graph"
     result_dir = "result"
 
-    results1 = []
     for name in graphs:
         print(name)
         full_name = data_dir + "/" + name
         G = loadGraph(full_name)
         for k in range(len(G)):
-            kernel = kernelize(edgeList(G), k)
-            if not kernel:
-                continue
-            C = best_recursiveVC(*kernel)
+            C = kernel_VC(edgeList(G), k)
             if C != None:
                 print("best", name, len(C), C)
-                results1.append(len(C))
-                saveSolution(result_dir + "/" + name + ".sol", set(C))
                 break
-
-    results2 = []
-    for name in graphs:
-        print(name)
-        full_name = data_dir + "/" + name
-        G = loadGraph(full_name)
         for k in range(len(G)):
             C = best_recursiveVC(edgeList(G), k)
             if C != None:
                 print("best", name, len(C), C)
-                results2.append(len(C))
-                saveSolution(result_dir + "/" + name + ".sol", set(C))
+                # saveSolution(result_dir + "/" + name + ".sol", set(C))
                 break

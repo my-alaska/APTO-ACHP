@@ -1,6 +1,6 @@
 from copy import copy
 
-from utils.dimacs import isVC
+from lab1.utils.dimacs import isVC
 from itertools import combinations
 
 

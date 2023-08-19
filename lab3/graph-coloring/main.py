@@ -75,8 +75,10 @@ if __name__ == "__main__":
         print(name)
         G = loadGraph(graph_dir + "/" + name)
         result = solve_coloring(G, 4)
+        print(result)
         if result == "UNSAT":
             print(result)
         elif not check_coloring(G, result):
             print("WRONG COLORING")
+
         print()
